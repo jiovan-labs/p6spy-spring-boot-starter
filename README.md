@@ -23,7 +23,6 @@ spring:
     datasource:
         url: 'jdbc:p6spy:mysql://xxx'
         driver-class-name: com.jiovan.revival.p6spy.engine.spy.P6SpyDriver
-
 jiovan:
     p6spy:
         appender: com.jiovan.revival.p6spy.engine.spy.appender.Slf4JLogger
