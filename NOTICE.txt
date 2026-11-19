@@ -1,6 +1,6 @@
 P6spy for Spring Boot Starter
-Copyright (c) 2022 Unikue Ltd. All rights reserved.
-https://unikue.cn
+Copyright (c) 2022 Jiovan Ltd. All rights reserved.
+https://jiovan.com
 
 P6Spy
 https://github.com/p6spy/p6spy

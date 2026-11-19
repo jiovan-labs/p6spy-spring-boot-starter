@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Unikue Ltd. All rights reserved.
+ * Copyright (c) 2022 Jiovan Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package cn.unikue.springstarter.p6spy.property;
+package com.jiovan.spring.starter.p6spy.property;
 
 
 import java.io.Serializable;
 import javax.sql.DataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import com.p6spy.engine.spy.P6SpyOptions;
-import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
-import com.p6spy.engine.spy.appender.P6Logger;
-import com.p6spy.engine.spy.appender.Slf4JLogger;
-import cn.unikue.commonplexus.javaseutil.annotation.PropertyAlias;
-import cn.unikue.springstarter.p6spy.config.P6spyAutoConfiguration;
-import cn.unikue.springstarter.p6spy.strategy.CompactSingleLineFormat;
+import com.jiovan.revival.p6spy.engine.spy.P6SpyOptions;
+import com.jiovan.revival.p6spy.engine.spy.appender.CompactLineFormat;
+import com.jiovan.revival.p6spy.engine.spy.appender.MessageFormattingStrategy;
+import com.jiovan.revival.p6spy.engine.spy.appender.P6Logger;
+import com.jiovan.revival.p6spy.engine.spy.appender.Slf4JLogger;
+import com.jiovan.plexus.common.toolkit.annotation.PropertyAlias;
+import com.jiovan.spring.starter.p6spy.config.P6spyAutoConfiguration;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -38,14 +38,13 @@ import lombok.ToString;
  * Note: Property names are case-sensitive, as same as p6spy
  *
  * @author David Hsing
- * @reference "https://p6spy.readthedocs.io/en/latest/configandusage.html"
- * @see com.p6spy.engine.spy.P6SpyOptions
+ * @see "https://p6spy.readthedocs.io/en/latest/configandusage.html"
+ * @see com.jiovan.revival.p6spy.engine.spy.P6SpyOptions
  */
 @ConfigurationProperties(prefix = P6spyAutoConfiguration.PROPERTIES_PREFIX)
 @Getter
 @Setter
 @ToString
-@SuppressWarnings({"JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class P6spyProperties implements Serializable {
     /**
      * Indicates whether to enable this starter or not
@@ -72,7 +71,7 @@ public class P6spyProperties implements Serializable {
     /**
      * Name of logfile to use
      * <p>
-     * Used for {@code com.p6spy.engine.spy.appender.FileLogger} only
+     * Used for {@code com.jiovan.revival.p6spy.engine.spy.appender.FileLogger} only
      * <p>
      * Default is {@code "p6spy.log"}
      * <p>
@@ -84,9 +83,9 @@ public class P6spyProperties implements Serializable {
     /**
      * Class to use for formatting log messages
      * <p>
-     * The original default is {@code com.p6spy.engine.spy.appender.SingleLineFormat}
+     * The original default is {@code com.jiovan.revival.p6spy.engine.spy.appender.SingleLineFormat}
      */
-    private Class<? extends MessageFormattingStrategy> logMessageFormat = CompactSingleLineFormat.class;
+    private Class<? extends MessageFormattingStrategy> logMessageFormat = CompactLineFormat.class;
 
     /**
      * Append to the p6spy log file
@@ -112,12 +111,12 @@ public class P6spyProperties implements Serializable {
      * <p>
      * Note: reload means forgetting all the previously settings (even those set during runtime - via JMX) and starting with the clean table
      * <p>
-     * The original default is {@code com.p6spy.engine.spy.appender.FileLogger}
+     * The original default is {@code com.jiovan.revival.p6spy.engine.spy.appender.FileLogger}
      * <pre><code>
-     * appender = com.p6spy.engine.spy.appender.NoopLogger
-     * appender = com.p6spy.engine.spy.appender.Slf4JLogger
-     * appender = com.p6spy.engine.spy.appender.StdoutLogger
-     * appender = com.p6spy.engine.spy.appender.FileLogger
+     * appender = com.jiovan.revival.p6spy.engine.spy.appender.NoopLogger
+     * appender = com.jiovan.revival.p6spy.engine.spy.appender.Slf4JLogger
+     * appender = com.jiovan.revival.p6spy.engine.spy.appender.StdoutLogger
+     * appender = com.jiovan.revival.p6spy.engine.spy.appender.FileLogger
      * </code></pre>
      */
     private Class<? extends P6Logger> appender = Slf4JLogger.class;
@@ -127,7 +126,7 @@ public class P6spyProperties implements Serializable {
      * <p>
      * Only modules listed are active
      * <p>
-     * Default is {@code com.p6spy.engine.logging.P6LogFactory} and {@code com.p6spy.engine.spy.P6SpyFactory}
+     * Default is {@code com.jiovan.revival.p6spy.engine.logging.P6LogFactory} and {@code com.jiovan.revival.p6spy.engine.spy.P6SpyFactory}
      * <p>
      * Note: the core module (P6SpyFactory) can't be deactivated
      * <br>
@@ -242,7 +241,7 @@ public class P6spyProperties implements Serializable {
     /**
      * DataSource replacement
      * <p>
-     * Replace the real DataSource class in your application server configuration with the name com.p6spy.engine.spy.P6DataSource
+     * Replace the real DataSource class in your application server configuration with the name com.jiovan.revival.p6spy.engine.spy.P6DataSource
      * (that provides also connection pooling and xa support). then add the JNDI name and class name of the real DataSource here
      * <p>
      * Values set in this item cannot be reloaded using the {@code reloadProperties} variable. Once it is loaded, it remains
@@ -283,7 +282,7 @@ public class P6spyProperties implements Serializable {
     private String realDatasourceProperties;
 
     /**
-     * Custom log message format used ONLY if {@code logMessageFormat} is set to com.p6spy.engine.spy.appender.CustomLineFormat
+     * Custom log message format used ONLY if {@code logMessageFormat} is set to com.jiovan.revival.p6spy.engine.spy.appender.CustomLineFormat
      * <p>
      * Default is %(currentTime)|%(executionTime)|%(category)|connection%(connectionId)|%(sqlSingleLine)
      * <p>
@@ -336,7 +335,7 @@ public class P6spyProperties implements Serializable {
     /**
      * If exposing options via jmx (see {@code jmx}), what should be the prefix used?
      * <p>
-     * jmx naming pattern constructed is: com.p6spy(.<jmxPrefix>)?:name=<optionsClassName>
+     * jmx naming pattern constructed is: com.jiovan.revival.p6spy(.<jmxPrefix>)?:name=<optionsClassName>
      * <p>
      * Note, if there is already such a name in use it would be unregistered first (the last registered wins)
      */

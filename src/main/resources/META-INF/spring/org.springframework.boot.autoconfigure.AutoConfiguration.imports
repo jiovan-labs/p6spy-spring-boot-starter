@@ -1,5 +1,5 @@
 # P6spy for Spring Boot Starter
-# Copyright (c) 2022 Unikue Ltd. All rights reserved.
-# https://unikue.cn
+# Copyright (c) 2022 Jiovan Ltd. All rights reserved.
+# https://jiovan.com
 
-cn.unikue.springstarter.p6spy.config.P6spyAutoConfiguration
+com.jiovan.spring.starter.p6spy.config.P6spyAutoConfiguration

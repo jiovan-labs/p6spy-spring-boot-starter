@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Unikue Ltd. All rights reserved.
+ * Copyright (c) 2022 Jiovan Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.unikue.springstarter.p6spy.config;
+package com.jiovan.spring.starter.p6spy.config;
 
 
 import java.util.Map;
@@ -27,15 +27,16 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
-import com.p6spy.engine.spy.P6ModuleManager;
-import com.p6spy.engine.spy.P6SpyDriver;
-import com.p6spy.engine.spy.P6SpyOptions;
-import cn.unikue.commonplexus.javaseutil.annotation.PropertyAlias;
-import cn.unikue.commonplexus.javaseutil.constant.StringVariantConst;
-import cn.unikue.commonplexus.springutil.util.AnnotationUtilsWraps;
-import cn.unikue.commonplexus.springutil.util.ClassUtilsWraps;
-import cn.unikue.commonplexus.springutil.util.ReflectionUtilsWraps;
-import cn.unikue.springstarter.p6spy.property.P6spyProperties;
+import com.jiovan.plexus.common.toolkit.util.StringUtilsWraps;
+import com.jiovan.revival.p6spy.engine.spy.P6ModuleManager;
+import com.jiovan.revival.p6spy.engine.spy.P6SpyDriver;
+import com.jiovan.revival.p6spy.engine.spy.P6SpyOptions;
+import com.jiovan.plexus.common.toolkit.annotation.PropertyAlias;
+import com.jiovan.plexus.common.toolkit.constant.StringVariantConst;
+import com.jiovan.plexus.spring.toolkit.util.AnnotationUtilsWraps;
+import com.jiovan.plexus.spring.toolkit.util.ClassUtilsWraps;
+import com.jiovan.plexus.spring.toolkit.util.ReflectionUtilsWraps;
+import com.jiovan.spring.starter.p6spy.property.P6spyProperties;
 import lombok.RequiredArgsConstructor;
 
 
@@ -43,17 +44,16 @@ import lombok.RequiredArgsConstructor;
  * Configuration for p6spy
  *
  * @author David Hsing
- * @reference "https://github.com/klboke/p6spy-spring-boot-starter"
- * @see "com.p6spy.engine.spy.option.SystemProperties"
+ * @see "https://github.com/klboke/p6spy-spring-boot-starter"
+ * @see "com.jiovan.revival.p6spy.engine.spy.option.SystemProperties"
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(value = P6SpyDriver.class)
 @ConditionalOnBooleanProperty(prefix = P6spyAutoConfiguration.PROPERTIES_PREFIX, name = "enabled", matchIfMissing = true)
 @EnableConfigurationProperties(value = P6spyProperties.class)
 @RequiredArgsConstructor
-@SuppressWarnings({"JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class P6spyAutoConfiguration implements InitializingBean {
-    public static final String PROPERTIES_PREFIX = "spring.p6spy";    // $NON-NLS-1$
+    public static final String PROPERTIES_PREFIX = "jiovan.p6spy";    // $NON-NLS-1$
 
     private final P6spyProperties properties;
 
@@ -62,7 +62,7 @@ public class P6spyAutoConfiguration implements InitializingBean {
         Map<String, String> options = P6SpyOptions.getActiveInstance().getDefaults();
         ReflectionUtils.doWithFields(P6spyProperties.class, field -> {
             String fieldName = field.getName();
-            if (StringUtils.equalsIgnoreCase(fieldName, StringVariantConst.ENABLED)) {
+            if (StringUtilsWraps.equalsIgnoreCase(fieldName, StringVariantConst.ENABLED)) {
                 return;
             }
             String fieldValue = null;
@@ -70,7 +70,7 @@ public class P6spyAutoConfiguration implements InitializingBean {
                 fieldValue = BooleanUtils.toStringTrueFalse(ReflectionUtilsWraps.getFieldAs(field, true, properties, Boolean.class));
             } else if (ClassUtils.isAssignable(String.class, field.getType())) {
                 fieldValue = ReflectionUtilsWraps.getFieldAs(field, true, properties, String.class);
-                if (StringUtils.isNotBlank(fieldValue) && StringUtils.equalsIgnoreCase(fieldName, P6SpyOptions.LOGFILE)) {
+                if (StringUtils.isNotBlank(fieldValue) && StringUtilsWraps.equalsIgnoreCase(fieldName, P6SpyOptions.LOGFILE)) {
                     fieldValue = org.springframework.util.StringUtils.cleanPath(fieldValue);
                 }
             } else if (ClassUtils.isAssignable(Class.class, field.getType())) {
