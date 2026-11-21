@@ -44,6 +44,7 @@ import lombok.RequiredArgsConstructor;
  * Configuration for p6spy
  *
  * @author David Hsing
+ *
  * @see "https://github.com/klboke/p6spy-spring-boot-starter"
  * @see "com.jiovan.revival.p6spy.engine.spy.option.SystemProperties"
  */

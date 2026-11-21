@@ -17,14 +17,14 @@
 package com.jiovan.spring.starter.p6spy;
 
 
-import jakarta.annotation.Nullable;
+import jakarta.annotation.Nonnull;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
 class MockApplicationInitializer {
-    public static void main(@Nullable String[] args) {
+    public static void main(@Nonnull String[] args) {
         SpringApplication.run(MockApplicationInitializer.class, args);
     }
 }

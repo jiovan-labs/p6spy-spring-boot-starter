@@ -38,6 +38,7 @@ import lombok.ToString;
  * Note: Property names are case-sensitive, as same as p6spy
  *
  * @author David Hsing
+ *
  * @see "https://p6spy.readthedocs.io/en/latest/configandusage.html"
  * @see com.jiovan.revival.p6spy.engine.spy.P6SpyOptions
  */
